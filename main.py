@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -7,6 +8,13 @@ G = 6.6743e-11
 M = 1.9891e30
 dt = 60 * 60 * 24
 skip_frames = 10 
+
+m = 1   #asteroid mass
+A = 1  #surface area of paint
+a = 1  #albedo
+L = 1  #solar constant 
+l = m*149597871000*29784.8   #angular momentum
+lamb = (L*A*(1+a))/(4*math.pi*m*299792458) - G*M
 
 # Initial conditions
 x1, y1 = 149597871000, 0.0
@@ -53,12 +61,13 @@ def physics_step():
 
     # Asteroid 2
     r2 = np.sqrt(x2**2 + y2**2)
-    ax2 = -G * M * x2 / r2**3 + 1.3e8 * x2 / r2**2
-    ay2 = -G * M * y2 / r2**3 + 1.3e8 * y2 / r2**2
+    
+    ax2 = 0.64 * -G * M * x2 / r2**3 #+ 5e19 * x2 / r2**3
+    ay2 = 0.64 * -G * M * y2 / r2**3 #+ 5e19 * y2 / r2**3
     vx2 += ax2 * dt
     vy2 += ay2 * dt
-    #x2 += vx2 * dt
-    #y2 += vy2 * dt
+    x2 += vx2 * dt
+    y2 += vy2 * dt
     
 
 
