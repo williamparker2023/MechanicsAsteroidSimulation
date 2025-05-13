@@ -11,10 +11,10 @@ dt = 60 * 60
 skip_frames = 24 * 7
 
 c = 2.998e8
-asteroidRadius = 10  # meters
-asteroidDensity = 10#2630    kg/m^3
-m = (4/3) * math.pi * (asteroidRadius)**3 * asteroidDensity
-A = 0.0*math.pi * asteroidRadius**2
+asteroidRadius = 100  # meters
+asteroidDensity = 2630    #kg/m^3
+m = 100 * 1000#(4/3) * math.pi * (asteroidRadius)**3 * asteroidDensity
+A = math.pi * asteroidRadius**2
 a = 1
 L = 3.828e26
 lamb = (L*A*(1+a)) / (4 * math.pi * m * 299792458) - G*M
@@ -75,7 +75,7 @@ def physics_step():
     x2 += vx2 * dt
     y2 += vy2 * dt
 
-    radius_text.set_text(f"Distance from Normal Orbit: {((x2-x1)**2 + (y2-y1)**2)**0.5/1000000:.2f} k km")
+    radius_text.set_text(f"Distance from Normal Orbit: {((x2-x1)**2 + (y2-y1)**2)**0.5/1000:.2f} km")
     mass_radius_text.set_text(f"Mass: {m:.2e} kg | Radius: {asteroidRadius} m")
 
 def update(frame):
@@ -120,5 +120,5 @@ ani = FuncAnimation(
     blit=True, interval=1
 )
 
-ani.save("asteroid_simulation0.gif", writer=PillowWriter(fps=30))
+#ani.save("asteroid_simulation100Bkg.gif", writer=PillowWriter(fps=30))
 plt.show()
